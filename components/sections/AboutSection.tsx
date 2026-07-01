@@ -1,0 +1,96 @@
+import { MapPin, GraduationCap, Cpu, Rocket } from "lucide-react";
+
+import { Reveal } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
+
+const config = [
+  { key: "unit_name", value: '"Arsalan Maniar"' },
+  { key: "role", value: '"AI Engineer & Full Stack Developer"' },
+  { key: "location", value: '"Karachi, PK"' },
+  { key: "status", value: '"actively_learning"' },
+  { key: "core_directive", value: '"Solve real problems"' },
+];
+
+const highlights = [
+  { icon: Cpu, label: "AI-First Engineering" },
+  { icon: Rocket, label: "Full Stack Web Apps" },
+  { icon: GraduationCap, label: "GIAIC — AI & Computing" },
+  { icon: MapPin, label: "Karachi, Pakistan" },
+];
+
+export function AboutSection() {
+  return (
+    <section id="about" className="border-t border-border/50 py-24">
+      <div className="container">
+        <SectionHeading path="> WHOAMI" title="About Me" />
+
+        <div className="grid gap-10 lg:grid-cols-5">
+          {/* Prose */}
+          <Reveal className="lg:col-span-3">
+            <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
+              <p>
+                Hi, I&apos;m <span className="text-foreground">Arsalan Maniar</span> —
+                an AI Engineer & Full Stack Developer who builds modern web apps and
+                AI-powered systems. I enjoy reverse-engineering new technologies,
+                training my skills like a neural network, and shipping projects
+                that actually matter in the real world.
+              </p>
+              <p>
+                My core directive:{" "}
+                <span className="text-primary">
+                  &quot;Build intelligent systems that solve real problems.&quot;
+                </span>{" "}
+                Lately I&apos;ve been building conversational AI, agentic
+                workflows, and production-ready web experiences with Next.js and
+                Python.
+              </p>
+              <p className="font-mono text-sm text-muted-foreground/80">
+                <span className="text-secondary">$</span> currently_learning
+                <span className="text-foreground"> FastAPI</span>,
+                <span className="text-foreground"> AI Agents SDK</span>, and
+                production AI systems.
+              </p>
+
+              {/* Highlights */}
+              <ul className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
+                {highlights.map((h) => (
+                  <li
+                    key={h.label}
+                    className="flex items-center gap-3 rounded-md border border-border/70 bg-card/40 px-4 py-3 text-sm text-foreground"
+                  >
+                    <h.icon className="size-4 shrink-0 text-primary" />
+                    {h.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          {/* Config terminal card */}
+          <Reveal delay={0.1} className="lg:col-span-2">
+            <div className="rounded-lg border border-border/70 bg-card/60 shadow-xl">
+              <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
+                <span className="flex gap-1.5">
+                  <span className="size-2.5 rounded-full bg-destructive/80" />
+                  <span className="size-2.5 rounded-full bg-secondary/80" />
+                  <span className="size-2.5 rounded-full bg-primary/80" />
+                </span>
+                <span className="ml-2 font-mono text-xs text-muted-foreground">
+                  cat unit.config
+                </span>
+              </div>
+              <dl className="space-y-3 p-5 font-mono text-sm">
+                {config.map((row) => (
+                  <div key={row.key} className="flex flex-wrap gap-x-2">
+                    <dt className="text-primary">{row.key}:</dt>
+                    <dd className="text-foreground/90">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+   * Dark theme is the default and only theme for this portfolio.
+   * Colors are expressed as HSL channels so shadcn/ui tokens resolve correctly.
+   * background: #0a0a0a (near black) · primary: cyan #06b6d4 · accent: amber #f59e0b
+   */
+  :root {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 5.5%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 5.5%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Cyan primary accent */
+    --primary: 188 94% 43%;
+    --primary-foreground: 0 0% 3.9%;
+
+    /* Amber secondary accent */
+    --secondary: 38 92% 50%;
+    --secondary-foreground: 0 0% 3.9%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 188 94% 43%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Guard against any decorative absolute/blur element causing sideways scroll.
+       `clip` (not `hidden`) avoids making <body> a scroll container, which would
+       otherwise break the sticky Navbar. */
+    overflow-x: clip;
+  }
+  /* Offset anchored sections so they clear the sticky navbar (h-16 = 4rem) */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Cyan text glow used for the hero name / terminal accents */
+  .glow-cyan {
+    text-shadow:
+      0 0 8px hsl(188 94% 43% / 0.7),
+      0 0 24px hsl(188 94% 43% / 0.45),
+      0 0 48px hsl(188 94% 43% / 0.25);
+  }
+
+  .glow-cyan-sm {
+    text-shadow: 0 0 6px hsl(188 94% 43% / 0.55);
+  }
+
+  /* Subtle grid background pattern */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(0 0% 100% / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 100% / 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* Subtle dot background pattern */
+  .bg-dots {
+    background-image: radial-gradient(hsl(0 0% 100% / 0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* Radial fade mask so patterns dissolve toward the edges */
+  .mask-fade {
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+  }
+
+  /* Blinking terminal cursor */
+  .terminal-cursor::after {
+    content: "▋";
+    margin-left: 0.15rem;
+    color: hsl(188 94% 43%);
+    animation: blink 1.1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+}
