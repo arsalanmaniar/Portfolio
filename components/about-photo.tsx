@@ -29,6 +29,7 @@ export function AboutPhoto() {
           width={400}
           height={500}
           priority
+          style={{ objectPosition: "center 10%" }}
           className="h-auto w-full rounded-2xl border-2 border-cyan-500/30 object-cover shadow-2xl shadow-cyan-500/20"
         />
       </div>
