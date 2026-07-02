@@ -102,9 +102,7 @@ export function AboutSection() {
           <p className="mb-4 font-mono text-sm text-primary glow-cyan-sm">
             &gt; GITHUB_ACTIVITY
           </p>
-          <div className="rounded-lg border border-cyan-500/30 bg-card/40 p-4 sm:p-6">
-            <GithubStats />
-          </div>
+          <GithubStats />
         </Reveal>
       </div>
     </section>
