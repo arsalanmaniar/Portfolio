@@ -75,14 +75,14 @@ export function HeroSection() {
               aria-hidden
               className="absolute -inset-1 animate-pulse rounded-full border border-cyan-400/50"
             />
-            <div className="h-16 w-16 rounded-full border-2 border-cyan-400 p-0.5 ring-2 ring-cyan-400/30">
+            <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-cyan-400 ring-2 ring-cyan-400/30">
               <Image
                 src="/avatar.jpg"
                 alt="Arsalan Maniar"
                 width={64}
                 height={64}
                 priority
-                style={{ objectPosition: "center top" }}
+                style={{ objectPosition: "center 15%" }}
                 className="h-full w-full rounded-full object-cover"
               />
             </div>
