@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Download, Terminal } from "lucide-react";
@@ -63,6 +64,29 @@ export function HeroSection() {
 
       <div className="container relative z-10 py-24">
         <div className="mx-auto max-w-3xl">
+          {/* Profile avatar with pulsing cyan ring */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative mb-6 h-16 w-16"
+          >
+            <span
+              aria-hidden
+              className="absolute -inset-1 animate-pulse rounded-full border border-cyan-400/50"
+            />
+            <div className="h-16 w-16 rounded-full border-2 border-cyan-400 p-0.5">
+              <Image
+                src="/avatar.jpg"
+                alt="Arsalan Maniar"
+                width={64}
+                height={64}
+                priority
+                className="h-full w-full rounded-full object-cover"
+              />
+            </div>
+          </motion.div>
+
           {/* Boot sequence terminal */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}

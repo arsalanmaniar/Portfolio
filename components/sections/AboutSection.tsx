@@ -2,6 +2,7 @@ import { MapPin, GraduationCap, Cpu, Rocket } from "lucide-react";
 
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
+import { AboutPhoto } from "@/components/about-photo";
 
 const config = [
   { key: "unit_name", value: '"Arsalan Maniar"' },
@@ -66,9 +67,12 @@ export function AboutSection() {
             </div>
           </Reveal>
 
-          {/* Config terminal card */}
-          <Reveal delay={0.1} className="lg:col-span-2">
-            <div className="rounded-lg border border-border/70 bg-card/60 shadow-xl">
+          {/* Right column: profile photo + config terminal card */}
+          <div className="flex flex-col gap-8 lg:col-span-2">
+            <AboutPhoto />
+
+            <Reveal delay={0.1}>
+              <div className="rounded-lg border border-border/70 bg-card/60 shadow-xl">
               <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
                 <span className="flex gap-1.5">
                   <span className="size-2.5 rounded-full bg-destructive/80" />
@@ -86,9 +90,10 @@ export function AboutSection() {
                     <dd className="text-foreground/90">{row.value}</dd>
                   </div>
                 ))}
-              </dl>
-            </div>
-          </Reveal>
+                </dl>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
