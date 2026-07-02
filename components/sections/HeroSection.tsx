@@ -75,7 +75,7 @@ export function HeroSection() {
               aria-hidden
               className="absolute -inset-1 animate-pulse rounded-full border border-cyan-400/50"
             />
-            <div className="h-16 w-16 rounded-full border-2 border-cyan-400 p-0.5">
+            <div className="h-16 w-16 rounded-full border-2 border-cyan-400 p-0.5 ring-2 ring-cyan-400/30">
               <Image
                 src="/avatar.jpg"
                 alt="Arsalan Maniar"
