@@ -1,14 +1,9 @@
-import Image from "next/image";
 import { MapPin, GraduationCap, Cpu, Rocket } from "lucide-react";
 
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { AboutPhoto } from "@/components/about-photo";
-
-const githubStatsUrl =
-  "https://github-readme-stats.vercel.app/api?username=arsalanmaniar&show_icons=true&theme=transparent&hide_border=true&title_color=06b6d4&icon_color=06b6d4&text_color=ffffff&bg_color=00000000";
-const githubLangsUrl =
-  "https://github-readme-stats.vercel.app/api/top-langs/?username=arsalanmaniar&layout=compact&theme=transparent&hide_border=true&title_color=06b6d4&text_color=ffffff&bg_color=00000000";
+import { GithubStats } from "@/components/github-stats";
 
 const config = [
   { key: "unit_name", value: '"Arsalan Maniar"' },
@@ -108,24 +103,7 @@ export function AboutSection() {
             &gt; GITHUB_ACTIVITY
           </p>
           <div className="rounded-lg border border-cyan-500/30 bg-card/40 p-4 sm:p-6">
-            <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
-              <Image
-                src={githubStatsUrl}
-                alt="Arsalan Maniar's GitHub stats"
-                width={495}
-                height={195}
-                unoptimized
-                className="h-auto w-full max-w-md"
-              />
-              <Image
-                src={githubLangsUrl}
-                alt="Arsalan Maniar's most used languages"
-                width={350}
-                height={195}
-                unoptimized
-                className="h-auto w-full max-w-xs"
-              />
-            </div>
+            <GithubStats />
           </div>
         </Reveal>
       </div>
