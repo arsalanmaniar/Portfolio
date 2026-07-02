@@ -6,6 +6,10 @@ import { SectionHeading } from "@/components/section-heading";
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
 import { socials } from "@/lib/nav";
 
+// Shared input/textarea styling — cyan border + ring on focus.
+const fieldClass =
+  "w-full rounded-md border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/50";
+
 const channels = [
   {
     label: "Email",
@@ -75,11 +79,83 @@ export function ContactSection() {
           ))}
         </div>
 
-        <Reveal delay={0.2} className="mt-8">
-          <p className="font-mono text-sm text-muted-foreground">
-            <span className="text-primary terminal-cursor">
-              awaiting your message
-            </span>
+        {/* Contact form (mailto fallback — opens the visitor's email client) */}
+        <Reveal delay={0.15} className="mt-8">
+          <form
+            action={`mailto:${socials.email}`}
+            method="POST"
+            encType="text/plain"
+            className="mx-auto max-w-2xl rounded-lg border border-border/70 bg-card/60 p-6 sm:p-8"
+          >
+            <div className="space-y-5">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="mb-2 block font-mono text-sm text-primary"
+                >
+                  $ name:
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="John Doe"
+                  className={fieldClass}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="mb-2 block font-mono text-sm text-primary"
+                >
+                  $ email:
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="john@example.com"
+                  className={fieldClass}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  className="mb-2 block font-mono text-sm text-primary"
+                >
+                  $ message:
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  required
+                  placeholder="Tell me about your project..."
+                  className={`${fieldClass} resize-y`}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                &gt; SEND_MESSAGE
+              </button>
+            </div>
+          </form>
+
+          <p className="mt-4 text-center font-mono text-xs text-muted-foreground">
+            &gt; or reach me directly at{" "}
+            <a
+              href={`mailto:${socials.email}`}
+              className="text-primary transition-colors hover:text-primary/80 hover:underline"
+            >
+              {socials.email}
+            </a>
           </p>
         </Reveal>
       </div>

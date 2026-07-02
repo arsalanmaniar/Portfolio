@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { PageTransition } from "@/components/page-transition";
+import { ClientFX } from "@/components/client-fx";
 import { siteConfig } from "@/lib/site";
 
 const geistSans = localFont({
@@ -65,8 +66,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased md:cursor-none`}
       >
+        <ClientFX />
         <Navbar />
         <PageTransition>
           <main className="min-h-screen">{children}</main>
