@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
@@ -14,6 +15,7 @@ type Project = {
   name: string;
   description: string;
   tech: string[];
+  image?: string;
   demo?: string;
   source: string;
   featured?: boolean;
@@ -25,6 +27,7 @@ const projects: Project[] = [
     description:
       "A conversational AI chatbot that replies on WhatsApp in real time. Powered by Groq's LLMs through a FastAPI backend, with SQLite for chat memory and UltraMsg for message delivery — deployed on Hugging Face.",
     tech: ["Python", "FastAPI", "Groq API", "SQLite", "UltraMsg", "Hugging Face"],
+    image: "/projects/ai-chatbot.jpeg",
     demo: "https://arsalanmaniar-ai-chatbot.hf.space/demo",
     source: "https://github.com/arsalanmaniar/ai-chatbot-project",
     featured: true,
@@ -34,6 +37,7 @@ const projects: Project[] = [
     description:
       "An AI-powered resume analysis and optimization tool that tailors resumes to job descriptions and surfaces improvements for stronger ATS match rates.",
     tech: ["Next.js", "TypeScript", "OpenAI API"],
+    image: "/projects/ai-resume.jpeg",
     demo: "https://ai-resume-optimizer-ebon.vercel.app/",
     source: "https://github.com/arsalanmaniar/ai-resume-optimizer",
   },
@@ -42,6 +46,7 @@ const projects: Project[] = [
     description:
       "An AI-powered interactive book experience that generates and personalizes reading content on the fly.",
     tech: ["Next.js", "TypeScript", "AI Integration"],
+    image: "/projects/ai-book.jpeg",
     demo: "https://ai-book-two-kohl.vercel.app/",
     source: "https://github.com/arsalanmaniar/Ai-Book",
   },
@@ -50,6 +55,7 @@ const projects: Project[] = [
     description:
       "A full-stack todo app containerized with Docker and orchestrated on Kubernetes as part of a multi-phase cloud-native build.",
     tech: ["Next.js", "Docker", "Kubernetes"],
+    image: "/projects/to-do-app.jpeg",
     demo: "https://to-do-ai-chat-application.vercel.app/",
     source:
       "https://github.com/arsalanmaniar/To-do-Application_Kubernetes_Phase-V",
@@ -59,6 +65,7 @@ const projects: Project[] = [
     description:
       "A motion-rich landing page showcasing modern CSS and JavaScript animation techniques.",
     tech: ["HTML", "CSS", "JavaScript", "Animations"],
+    image: "/projects/animated-web.jpeg",
     demo: "https://animated-web-page-cjyy.vercel.app/",
     source: "https://github.com/arsalanmaniar/Animated-Web-Page",
   },
@@ -67,6 +74,8 @@ const projects: Project[] = [
     description:
       "A clean Streamlit app for converting between common units of measurement — length, weight, temperature and more.",
     tech: ["Python", "Streamlit"],
+    image: "/projects/unit-convertor.jpeg",
+    demo: "https://unitconvertor-byarsalan.streamlit.app/",
     source: "https://github.com/arsalanmaniar/unit_convertor",
   },
   {
@@ -81,7 +90,17 @@ const projects: Project[] = [
     description:
       "A responsive feedback form built for SIUT with clean layout and client-side validation.",
     tech: ["Next.js", "Supabase", "TypeScript"],
+    image: "/projects/siut-feedback.jpeg",
     source: "https://github.com/arsalanmaniar/siut-feedback-foam",
+  },
+  {
+    name: "Password Strength Checker",
+    description:
+      "A Streamlit app that analyzes password strength in real-time, checking length, special characters, and complexity.",
+    tech: ["Python", "Streamlit"],
+    image: "/projects/password-checker.jpeg",
+    demo: "https://password-strength-meter-to-arsalan.streamlit.app/",
+    source: "https://github.com/arsalanmaniar/password_strength_meter",
   },
   {
     name: "Personal Portfolio",
@@ -97,48 +116,62 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.article
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="group relative flex h-full flex-col rounded-lg border border-border/70 bg-card/60 p-6 transition-colors hover:border-primary/50 hover:shadow-[0_16px_40px_-16px_hsl(188_94%_43%/0.45)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-card/60 transition-colors hover:border-primary/50 hover:shadow-[0_16px_40px_-16px_hsl(188_94%_43%/0.45)]"
     >
       {project.featured ? (
-        <span className="absolute right-5 top-5 rounded-full border border-secondary/40 bg-secondary/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-secondary">
+        <span className="absolute right-4 top-4 z-10 rounded-full border border-secondary/40 bg-background/80 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-secondary backdrop-blur">
           Featured
         </span>
       ) : null}
 
-      <h3 className="mb-3 pr-20 font-mono text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
-        {project.name}
-      </h3>
+      {project.image ? (
+        <div className="overflow-hidden border-b border-border/60">
+          <Image
+            src={project.image}
+            alt={`${project.name} screenshot`}
+            width={600}
+            height={340}
+            className="w-full h-48 object-cover object-top rounded-t-lg transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+      ) : null}
 
-      <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">
-        {project.description}
-      </p>
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="mb-3 font-mono text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
+          {project.name}
+        </h3>
 
-      <ul className="mb-6 flex flex-wrap gap-2">
-        {project.tech.map((t) => (
-          <li
-            key={t}
-            className="rounded-full border border-border bg-background px-3 py-1 font-mono text-xs text-secondary"
-          >
-            {t}
-          </li>
-        ))}
-      </ul>
+        <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">
+          {project.description}
+        </p>
 
-      <div className="flex flex-wrap gap-3">
-        {project.demo ? (
-          <Button asChild size="sm" className="font-mono">
-            <Link href={project.demo} target="_blank" rel="noreferrer">
-              <ExternalLink />
-              Live Demo
+        <ul className="mb-6 flex flex-wrap gap-2">
+          {project.tech.map((t) => (
+            <li
+              key={t}
+              className="rounded-full border border-border bg-background px-3 py-1 font-mono text-xs text-secondary"
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-3">
+          {project.demo ? (
+            <Button asChild size="sm" className="font-mono">
+              <Link href={project.demo} target="_blank" rel="noreferrer">
+                <ExternalLink />
+                Live Demo
+              </Link>
+            </Button>
+          ) : null}
+          <Button asChild size="sm" variant="outline" className="font-mono">
+            <Link href={project.source} target="_blank" rel="noreferrer">
+              <GithubIcon />
+              GitHub
             </Link>
           </Button>
-        ) : null}
-        <Button asChild size="sm" variant="outline" className="font-mono">
-          <Link href={project.source} target="_blank" rel="noreferrer">
-            <GithubIcon />
-            GitHub
-          </Link>
-        </Button>
+        </div>
       </div>
     </motion.article>
   );
