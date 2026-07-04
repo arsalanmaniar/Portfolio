@@ -83,6 +83,7 @@ const projects: Project[] = [
     description:
       "A Streamlit tool to catalogue, search, and manage a personal book collection with a simple, fast interface.",
     tech: ["Python", "Streamlit"],
+    image: "/projects/personal-library.jpg",
     source: "https://github.com/arsalanmaniar/personal_library_manager",
   },
   {
