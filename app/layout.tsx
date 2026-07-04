@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { PageTransition } from "@/components/page-transition";
 import { ClientFX } from "@/components/client-fx";
+import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/lib/site";
 
 const geistSans = localFont({
@@ -64,16 +67,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased md:cursor-none`}
       >
-        <ClientFX />
-        <Navbar />
-        <PageTransition>
-          <main className="min-h-screen">{children}</main>
-        </PageTransition>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+        >
+          <ClientFX />
+          <Navbar />
+          <PageTransition>
+            <main className="min-h-screen">{children}</main>
+          </PageTransition>
+          <Footer />
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

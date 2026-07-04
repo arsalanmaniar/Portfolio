@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { navItems } from "@/lib/nav";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -41,31 +42,37 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
-        <ul className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="group relative font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary shadow-[0_0_8px_hsl(188_94%_43%/0.8)] transition-all duration-300 ease-out group-hover:w-full" />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/* Desktop right cluster: theme toggle before nav links */}
+        <div className="hidden items-center gap-8 md:flex">
+          <ThemeToggle />
+          <ul className="flex items-center gap-8">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="group relative font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary shadow-[0_0_8px_hsl(188_94%_43%/0.8)] transition-all duration-300 ease-out group-hover:w-full" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+        {/* Mobile controls: theme toggle + hamburger */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}

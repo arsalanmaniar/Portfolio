@@ -41,6 +41,42 @@
 
     --radius: 0.5rem;
   }
+
+  /*
+   * Light theme overrides (applied when next-themes sets class="light").
+   * background: #ffffff · text: #0a0a0a · cards: #f8f8f8 · cyan/amber unchanged.
+   */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 97.3%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    /* Cyan primary accent (unchanged) */
+    --primary: 188 94% 43%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Amber secondary accent (unchanged) */
+    --secondary: 38 92% 50%;
+    --secondary-foreground: 0 0% 3.9%;
+
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 94%;
+    --accent-foreground: 0 0% 3.9%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 188 94% 43%;
+  }
 }
 
 @layer base {
@@ -93,6 +129,17 @@
   .bg-dots {
     background-image: radial-gradient(hsl(0 0% 100% / 0.07) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+
+  /* In light mode the white pattern lines vanish — use dark lines instead */
+  .light .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(0 0% 0% / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 0% / 0.06) 1px, transparent 1px);
+  }
+
+  .light .bg-dots {
+    background-image: radial-gradient(hsl(0 0% 0% / 0.09) 1px, transparent 1px);
   }
 
   /* Radial fade mask so patterns dissolve toward the edges */
