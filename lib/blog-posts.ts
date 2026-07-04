@@ -13,7 +13,7 @@ export const blogPosts: BlogPost[] = [
   {
     title: "How I Built an AI WhatsApp Chatbot for Local Businesses",
     slug: "ai-whatsapp-chatbot",
-    date: "2025-06-01",
+    date: "2026-06-01",
     readTime: "5 min read",
     tags: ["AI", "Python", "FastAPI", "WhatsApp"],
     excerpt:
@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
   {
     title: "Getting Started with RAG: Retrieval-Augmented Generation Explained",
     slug: "rag-explained",
-    date: "2025-06-15",
+    date: "2026-06-15",
     readTime: "4 min read",
     tags: ["AI", "RAG", "LLM", "Python"],
     excerpt:
@@ -43,7 +43,7 @@ export const blogPosts: BlogPost[] = [
   {
     title: "Why Every Local Business Needs an AI Chatbot in 2025",
     slug: "ai-chatbot-for-business",
-    date: "2025-07-01",
+    date: "2026-07-01",
     readTime: "3 min read",
     tags: ["AI", "Business", "Chatbot", "Freelance"],
     excerpt:
