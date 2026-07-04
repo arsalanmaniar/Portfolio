@@ -9,11 +9,15 @@ import { ArrowRight, Download, Terminal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-// Three.js scene is client-only — ssr:false avoids WebGL/hydration mismatches.
+// Three.js scenes are client-only — ssr:false avoids WebGL/hydration mismatches.
 const ParticleBackground = dynamic(
   () => import("@/components/three/ParticleBackground"),
   { ssr: false }
 );
+
+const RobotMascot = dynamic(() => import("@/components/three/RobotMascot"), {
+  ssr: false,
+});
 
 const bootLines = [
   "> initializing arsalan maniar.exe ...",
@@ -63,7 +67,8 @@ export function HeroSection() {
       <div className="pointer-events-none absolute left-1/2 top-1/3 z-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
 
       <div className="container relative z-10 py-24">
-        <div className="mx-auto max-w-3xl">
+        <div className="flex items-center justify-between gap-12">
+          <div className="w-full max-w-3xl">
           {/* Profile avatar with pulsing cyan ring */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -178,6 +183,17 @@ export function HeroSection() {
                 </a>
               </Button>
             </motion.div>
+          </motion.div>
+          </div>
+
+          {/* 3D robot mascot — right side, hidden on mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+            className="hidden shrink-0 md:block"
+          >
+            <RobotMascot />
           </motion.div>
         </div>
       </div>
