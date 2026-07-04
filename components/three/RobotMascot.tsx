@@ -5,8 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import type * as THREE from "three";
 
-const MODEL_URL =
-  "https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb";
+const MODEL_URL = "/robot.glb";
 
 /**
  * Animated GLTF robot (Three.js official RobotExpressive example model).
@@ -32,7 +31,7 @@ function Robot({ hovered }: { hovered: boolean }) {
     if (!group.current) return;
     // Gentle floating around the base offset.
     group.current.position.y =
-      -1.5 + Math.sin(state.clock.elapsedTime * 0.8) * 0.1;
+      -1.8 + Math.sin(state.clock.elapsedTime * 0.8) * 0.1;
     // Slow auto-rotate.
     group.current.rotation.y += 0.005;
   });
@@ -41,8 +40,8 @@ function Robot({ hovered }: { hovered: boolean }) {
     <primitive
       ref={group}
       object={scene}
-      scale={1.8}
-      position={[0, -1.5, 0]}
+      scale={1.2}
+      position={[0, -1.8, 0]}
     />
   );
 }
@@ -54,14 +53,14 @@ export default function RobotMascot() {
 
   return (
     <div
-      className="h-[450px] w-[350px]"
+      className="h-[480px] w-[320px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <Canvas
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
-        camera={{ position: [0, 1, 4], fov: 45 }}
+        camera={{ position: [0, 0.5, 5], fov: 35 }}
         style={{ background: "transparent" }}
       >
         <ambientLight intensity={0.6} />
