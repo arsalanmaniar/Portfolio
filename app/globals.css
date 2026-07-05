@@ -166,33 +166,106 @@
     }
   }
 
-  /* Robot mascot: gentle up/down float */
-  .animate-robot-float {
-    animation: robotFloat 3s ease-in-out infinite;
+  /*
+   * Robot mascot — layered humanoid idle. Each utility drives one nested div.
+   * All keyframes animate transform/filter/opacity only (GPU-composited);
+   * none touch width/height/top/left, so there is no layout thrash.
+   */
+  .animate-robot-ready {
+    animation: robotReady 8s ease-in-out infinite;
+  }
+  .animate-robot-sway {
+    animation: robotSway 4s ease-in-out infinite;
+  }
+  .animate-robot-breathe {
+    animation: robotBreathe 3s ease-in-out infinite;
+  }
+  .animate-robot-head {
+    animation: robotHeadTurn 6s ease-in-out infinite;
+  }
+  .animate-robot-glow {
+    animation: robotGlow 2.5s ease-in-out infinite;
   }
 
-  @keyframes robotFloat {
+  /* Weight shift — body sways left/right like a standing human */
+  @keyframes robotSway {
     0%,
+    100% {
+      transform: translateX(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateX(-4px) rotate(-0.8deg);
+    }
+    75% {
+      transform: translateX(4px) rotate(0.8deg);
+    }
+  }
+
+  /* Breathing — subtle scale + lift on the chest */
+  @keyframes robotBreathe {
+    0%,
+    100% {
+      transform: scaleY(1) translateY(0px);
+    }
+    50% {
+      transform: scaleY(1.015) translateY(-3px);
+    }
+  }
+
+  /* Head look-around — very subtle */
+  @keyframes robotHeadTurn {
+    0%,
+    40%,
     100% {
       transform: translateY(0px);
     }
-    50% {
-      transform: translateY(-15px);
+    20% {
+      transform: translateY(-2px) translateX(2px);
+    }
+    60% {
+      transform: translateY(-1px) translateX(-2px);
+    }
+    80% {
+      transform: translateY(-3px);
     }
   }
 
-  /* Robot mascot: pulsing cyan drop-shadow glow */
-  .animate-robot-glow {
-    animation: robotGlow 2s ease-in-out infinite;
-  }
-
+  /* Glow pulse — cyan energy */
   @keyframes robotGlow {
     0%,
     100% {
-      filter: drop-shadow(0 0 8px #06b6d4) drop-shadow(0 0 20px #06b6d440);
+      filter: drop-shadow(0 0 8px #06b6d4)
+        drop-shadow(0 0 20px rgba(6, 182, 212, 0.3));
     }
     50% {
-      filter: drop-shadow(0 0 20px #06b6d4) drop-shadow(0 0 40px #06b6d480);
+      filter: drop-shadow(0 0 25px #06b6d4)
+        drop-shadow(0 0 50px rgba(6, 182, 212, 0.5))
+        drop-shadow(0 0 80px rgba(6, 182, 212, 0.2));
+    }
+  }
+
+  /* Ready stance — slight forward lean like an action pose */
+  @keyframes robotReady {
+    0%,
+    100% {
+      transform: perspective(800px) rotateY(0deg) translateY(0px);
+    }
+    30% {
+      transform: perspective(800px) rotateY(3deg) translateY(-5px);
+    }
+    70% {
+      transform: perspective(800px) rotateY(-2deg) translateY(-3px);
+    }
+  }
+
+  /* Accessibility: stop all robot motion when the user prefers reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-robot-ready,
+    .animate-robot-sway,
+    .animate-robot-breathe,
+    .animate-robot-head,
+    .animate-robot-glow {
+      animation: none !important;
     }
   }
 }
