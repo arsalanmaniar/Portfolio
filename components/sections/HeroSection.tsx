@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Download, Terminal } from "lucide-react";
+import { ArrowRight, Terminal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import RobotMascot from "@/components/robot-mascot";
@@ -188,9 +188,40 @@ export function HeroSection() {
               <a
                 href="/resume.pdf"
                 download
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm text-white border border-cyan-500/40 bg-cyan-950/30 backdrop-blur-sm hover:bg-cyan-900/40 hover:border-cyan-400/70 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300"
+                style={{
+                  background: "rgba(6, 182, 212, 0.08)",
+                  border: "1px solid rgba(6, 182, 212, 0.45)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  boxShadow: "0 0 20px rgba(6, 182, 212, 0.1)",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = "rgba(6, 182, 212, 0.18)";
+                  el.style.border = "1px solid rgba(6, 182, 212, 0.7)";
+                  el.style.boxShadow = "0 0 30px rgba(6, 182, 212, 0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = "rgba(6, 182, 212, 0.08)";
+                  el.style.border = "1px solid rgba(6, 182, 212, 0.45)";
+                  el.style.boxShadow = "0 0 20px rgba(6, 182, 212, 0.1)";
+                }}
               >
-                <Download className="size-4" />
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
                 Download Resume
               </a>
             </motion.div>
