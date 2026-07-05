@@ -102,7 +102,7 @@ export default function RobotMascot() {
                     fill
                     priority
                     sizes="320px"
-                    style={{ objectFit: "contain", objectPosition: "center" }}
+                    style={{ objectFit: "contain", objectPosition: "left center" }}
                   />
                 </motion.div>
               </motion.div>
