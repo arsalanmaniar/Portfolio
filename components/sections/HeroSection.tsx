@@ -190,27 +190,27 @@ export function HeroSection() {
                 download
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300"
                 style={{
-                  background: "rgba(6, 182, 212, 0.12)",
-                  border: "1px solid rgba(6, 182, 212, 0.5)",
+                  background: "rgba(245, 158, 11, 0.06)",
+                  border: "1px solid rgba(245, 158, 11, 0.4)",
                   backdropFilter: "blur(12px)",
                   WebkitBackdropFilter: "blur(12px)",
-                  boxShadow: "0 0 20px rgba(6, 182, 212, 0.15)",
-                  color: "white",
+                  boxShadow: "0 0 20px rgba(245, 158, 11, 0.1)",
+                  color: "#f59e0b",
                   textShadow: "0 1px 3px rgba(0,0,0,0.5)",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget;
-                  el.style.background = "rgba(6, 182, 212, 0.18)";
-                  el.style.border = "1px solid rgba(6, 182, 212, 0.7)";
-                  el.style.boxShadow = "0 0 30px rgba(6, 182, 212, 0.25)";
-                  el.style.color = "white";
+                  el.style.background = "rgba(245, 158, 11, 0.12)";
+                  el.style.border = "1px solid rgba(245, 158, 11, 0.6)";
+                  el.style.boxShadow = "0 0 30px rgba(245, 158, 11, 0.2)";
+                  el.style.color = "#f59e0b";
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget;
-                  el.style.background = "rgba(6, 182, 212, 0.12)";
-                  el.style.border = "1px solid rgba(6, 182, 212, 0.5)";
-                  el.style.boxShadow = "0 0 20px rgba(6, 182, 212, 0.15)";
-                  el.style.color = "white";
+                  el.style.background = "rgba(245, 158, 11, 0.06)";
+                  el.style.border = "1px solid rgba(245, 158, 11, 0.4)";
+                  el.style.boxShadow = "0 0 20px rgba(245, 158, 11, 0.1)";
+                  el.style.color = "#f59e0b";
                 }}
               >
                 <svg
