@@ -129,29 +129,31 @@ export function SkillsSection() {
         <div className="grid gap-5 md:grid-cols-2">
           {groups.map((group, i) => (
             <Reveal key={group.title} delay={i * 0.08}>
-              <div className="h-full rounded-lg border border-border/70 bg-card/60 p-6 transition-colors hover:border-primary/40">
-                {/* Category header */}
-                <div className="mb-5 flex items-center gap-3">
-                  <span className="inline-flex size-10 items-center justify-center rounded-md border border-border bg-background text-primary">
-                    <group.icon className="size-5" />
+              <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-md transition-colors hover:border-cyan-500/30">
+                {/* Category header with cyan gradient wash */}
+                <div className="mb-5 flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-900/30 to-transparent p-3">
+                  <span className="inline-flex size-12 items-center justify-center rounded-lg border border-cyan-500/30 bg-background/60 text-cyan-400 shadow-[0_0_20px_-4px_rgba(6,182,212,0.7)]">
+                    <group.icon className="size-6" />
                   </span>
                   <div>
-                    <h3 className="font-mono text-base font-semibold text-foreground">
+                    <h3 className="font-mono text-xs uppercase tracking-widest text-cyan-400">
                       {group.title}
                     </h3>
-                    <p className="font-mono text-xs text-muted-foreground">
+                    <p className="mt-1 font-mono text-xs text-muted-foreground">
                       {group.tag}
                     </p>
                   </div>
                 </div>
 
-                {/* Skill chips */}
-                <ul className="flex flex-wrap gap-2.5">
+                {/* Skill badges — glass cards */}
+                <ul className="grid grid-cols-2 gap-2.5">
                   {group.skills.map((skill) => (
                     <li key={skill.name}>
-                      <span className="group/skill flex items-center gap-2 rounded-md border border-border bg-background px-3 py-2 text-sm text-muted-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60 hover:text-foreground hover:shadow-[0_0_16px_-4px_hsl(188_94%_43%/0.55)]">
-                        <skill.icon className="size-4 text-muted-foreground transition-colors group-hover/skill:text-primary" />
-                        {skill.name}
+                      <span className="group/skill flex h-full items-center gap-2 rounded-xl border border-white/10 bg-gray-900/60 p-3 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-cyan-500/40 hover:bg-gray-800/80">
+                        <skill.icon className="size-6 shrink-0 transition group-hover/skill:brightness-125" />
+                        <span className="text-sm font-medium text-gray-300">
+                          {skill.name}
+                        </span>
                       </span>
                     </li>
                   ))}

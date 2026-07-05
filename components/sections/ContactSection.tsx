@@ -6,9 +6,13 @@ import { SectionHeading } from "@/components/section-heading";
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
 import { socials } from "@/lib/nav";
 
-// Shared input/textarea styling — cyan border + ring on focus.
+// Shared input/textarea styling — glass field, cyan border + ring on focus.
 const fieldClass =
-  "w-full rounded-md border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/50";
+  "w-full rounded-xl border border-white/10 bg-gray-900/60 px-4 py-3 font-mono text-sm text-white outline-none backdrop-blur-sm transition duration-200 placeholder:text-gray-500 focus:border-cyan-500/60 focus:bg-gray-900/80 focus:ring-1 focus:ring-cyan-500/20";
+
+// Shared label styling.
+const labelClass =
+  "mb-2 block font-mono text-xs uppercase tracking-widest text-cyan-400";
 
 const channels = [
   {
@@ -54,11 +58,11 @@ export function ContactSection() {
                 href={c.href}
                 target={c.external ? "_blank" : undefined}
                 rel={c.external ? "noreferrer" : undefined}
-                className="group flex h-full flex-col justify-between gap-6 rounded-lg border border-border/70 bg-card/60 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_16px_40px_-16px_hsl(188_94%_43%/0.5)]"
+                className="group flex h-full flex-col justify-between gap-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-white/[0.06]"
               >
                 <div className="flex items-start justify-between">
-                  <span className="inline-flex size-12 items-center justify-center rounded-md border border-border bg-background text-primary transition-colors group-hover:border-primary/60 group-hover:glow-cyan-sm">
-                    <c.icon className="size-6" />
+                  <span className="inline-flex size-14 items-center justify-center rounded-xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/20 to-transparent text-cyan-400 shadow-[0_0_20px_-4px_rgba(6,182,212,0.7)] transition-colors group-hover:border-cyan-500/50">
+                    <c.icon className="size-8" />
                   </span>
                   <ArrowUpRight className="size-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
                 </div>
@@ -85,15 +89,12 @@ export function ContactSection() {
             action={`mailto:${socials.email}`}
             method="POST"
             encType="text/plain"
-            className="mx-auto max-w-2xl rounded-lg border border-border/70 bg-card/60 p-6 sm:p-8"
+            className="mx-auto max-w-2xl rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8"
           >
             <div className="space-y-5">
               <div>
-                <label
-                  htmlFor="name"
-                  className="mb-2 block font-mono text-sm text-primary"
-                >
-                  $ name:
+                <label htmlFor="name" className={labelClass}>
+                  Name
                 </label>
                 <input
                   id="name"
@@ -106,11 +107,8 @@ export function ContactSection() {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block font-mono text-sm text-primary"
-                >
-                  $ email:
+                <label htmlFor="email" className={labelClass}>
+                  Email
                 </label>
                 <input
                   id="email"
@@ -123,11 +121,8 @@ export function ContactSection() {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="mb-2 block font-mono text-sm text-primary"
-                >
-                  $ message:
+                <label htmlFor="message" className={labelClass}>
+                  Message
                 </label>
                 <textarea
                   id="message"
@@ -141,7 +136,7 @@ export function ContactSection() {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-2.5 font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="w-full rounded-xl bg-cyan-500 py-4 font-mono font-bold text-black transition duration-200 hover:scale-[1.02] hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/25 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 &gt; SEND_MESSAGE
               </button>

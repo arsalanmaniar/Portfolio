@@ -7,7 +7,6 @@ import { ExternalLink } from "lucide-react";
 
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Button } from "@/components/ui/button";
 import { GithubIcon } from "@/components/brand-icons";
 import { socials } from "@/lib/nav";
 
@@ -116,29 +115,39 @@ const projects: Project[] = [
 function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-card/60 transition-colors hover:border-primary/50 hover:shadow-[0_16px_40px_-16px_hsl(188_94%_43%/0.45)]"
+      whileHover={{ y: -8, rotateX: 2, rotateY: 2 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      style={{ transformPerspective: 800 }}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gray-900/80 backdrop-blur-sm transition-[border-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:shadow-[0_20px_60px_rgba(6,182,212,0.15)] ${
+        project.featured
+          ? "border-cyan-500/40 shadow-[0_0_34px_-8px_rgba(6,182,212,0.4)]"
+          : "border-white/5 hover:border-cyan-500/30"
+      }`}
     >
+      {/* Subtle top→bottom gradient overlay */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-transparent to-black/40" />
+
       {project.featured ? (
-        <span className="absolute right-4 top-4 z-10 rounded-full border border-secondary/40 bg-background/80 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-secondary backdrop-blur">
+        <span className="absolute right-4 top-4 z-20 rounded-full border border-cyan-500/50 bg-background/80 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-cyan-300 shadow-[0_0_16px_rgba(6,182,212,0.65)] backdrop-blur">
           Featured
         </span>
       ) : null}
 
       {project.image ? (
-        <div className="overflow-hidden border-b border-border/60">
+        <div className="relative z-10 overflow-hidden">
           <Image
             src={project.image}
             alt={`${project.name} screenshot`}
             width={600}
             height={340}
-            className="w-full h-48 object-cover object-top rounded-t-lg transition-transform duration-500 group-hover:scale-105"
+            className={`w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 ${
+              project.featured ? "h-56" : "h-48"
+            }`}
           />
         </div>
       ) : null}
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="relative z-10 flex flex-1 flex-col p-6">
         <h3 className="mb-3 font-mono text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
           {project.name}
         </h3>
@@ -151,7 +160,7 @@ function ProjectCard({ project }: { project: Project }) {
           {project.tech.map((t) => (
             <li
               key={t}
-              className="rounded-full border border-border bg-background px-3 py-1 font-mono text-xs text-secondary"
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-secondary"
             >
               {t}
             </li>
@@ -160,19 +169,25 @@ function ProjectCard({ project }: { project: Project }) {
 
         <div className="flex flex-wrap gap-3">
           {project.demo ? (
-            <Button asChild size="sm" className="font-mono">
-              <Link href={project.demo} target="_blank" rel="noreferrer">
-                <ExternalLink />
-                Live Demo
-              </Link>
-            </Button>
-          ) : null}
-          <Button asChild size="sm" variant="outline" className="font-mono">
-            <Link href={project.source} target="_blank" rel="noreferrer">
-              <GithubIcon />
-              GitHub
+            <Link
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-black transition duration-200 hover:scale-105 hover:brightness-110"
+            >
+              <ExternalLink className="size-4" />
+              Live Demo
             </Link>
-          </Button>
+          ) : null}
+          <Link
+            href={project.source}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-foreground transition duration-200 hover:border-white/30 hover:bg-white/10"
+          >
+            <GithubIcon className="size-4" />
+            GitHub
+          </Link>
         </div>
       </div>
     </motion.article>
