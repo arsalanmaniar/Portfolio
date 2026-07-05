@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { navItems } from "@/lib/nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-export function Navbar() {
+export const Navbar = memo(function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -103,4 +103,4 @@ export function Navbar() {
       </AnimatePresence>
     </header>
   );
-}
+});

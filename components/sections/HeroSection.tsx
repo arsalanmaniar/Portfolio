@@ -95,6 +95,7 @@ export function HeroSection() {
                 width={64}
                 height={64}
                 priority
+                sizes="64px"
                 style={{ objectPosition: "center 15%" }}
                 className="h-full w-full rounded-full object-cover"
               />

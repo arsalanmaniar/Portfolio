@@ -101,18 +101,9 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Cyan text glow used for the hero name / terminal accents */
-  .glow-cyan {
-    text-shadow:
-      0 0 8px hsl(188 94% 43% / 0.7),
-      0 0 24px hsl(188 94% 43% / 0.45),
-      0 0 48px hsl(188 94% 43% / 0.25);
-  }
-
+  /* Small cyan text glow used for the logo / terminal path accents.
+     (text-balance is provided natively by Tailwind 3.4 — no custom rule needed;
+     the larger .glow-cyan variant was unused and has been removed.) */
   .glow-cyan-sm {
     text-shadow: 0 0 6px hsl(188 94% 43% / 0.55);
   }

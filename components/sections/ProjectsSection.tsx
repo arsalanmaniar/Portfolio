@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import {
+  motion,
+  type MotionStyle,
+  type TargetAndTransition,
+  type Transition,
+} from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 import { Reveal } from "@/components/reveal";
@@ -112,13 +117,21 @@ const projects: Project[] = [
   },
 ];
 
+// Hoisted so these objects aren't re-allocated for every card on each render.
+const cardHover: TargetAndTransition = { y: -8, rotateX: 2, rotateY: 2 };
+const cardTransition: Transition = { duration: 0.4, ease: [0.4, 0, 0.2, 1] };
+const cardStyle: MotionStyle = { transformPerspective: 800 };
+// Responsive image sizing: 1 col (mobile) → 2 col (sm) → 3 col (lg).
+const cardImageSizes =
+  "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
+
 function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.article
-      whileHover={{ y: -8, rotateX: 2, rotateY: 2 }}
-      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-      style={{ transformPerspective: 800 }}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gray-900/80 backdrop-blur-sm transition-[border-color,box-shadow] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:shadow-[0_20px_60px_rgba(6,182,212,0.15)] ${
+      whileHover={cardHover}
+      transition={cardTransition}
+      style={cardStyle}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-gray-900/80 backdrop-blur-sm transition-[border-color,box-shadow] [transition-duration:400ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:shadow-[0_20px_60px_rgba(6,182,212,0.15)] ${
         project.featured
           ? "border-cyan-500/40 shadow-[0_0_34px_-8px_rgba(6,182,212,0.4)]"
           : "border-white/5 hover:border-cyan-500/30"
@@ -140,6 +153,7 @@ function ProjectCard({ project }: { project: Project }) {
             alt={`${project.name} screenshot`}
             width={600}
             height={340}
+            sizes={cardImageSizes}
             className={`w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 ${
               project.featured ? "h-56" : "h-48"
             }`}
@@ -173,9 +187,10 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.demo}
               target="_blank"
               rel="noreferrer"
+              aria-label={`${project.name} — live demo (opens in a new tab)`}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-black transition duration-200 hover:scale-105 hover:brightness-110"
             >
-              <ExternalLink className="size-4" />
+              <ExternalLink className="size-4" aria-hidden />
               Live Demo
             </Link>
           ) : null}
@@ -183,9 +198,10 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.source}
             target="_blank"
             rel="noreferrer"
+            aria-label={`${project.name} — source on GitHub (opens in a new tab)`}
             className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-foreground transition duration-200 hover:border-white/30 hover:bg-white/10"
           >
-            <GithubIcon className="size-4" />
+            <GithubIcon className="size-4" aria-hidden />
             GitHub
           </Link>
         </div>
