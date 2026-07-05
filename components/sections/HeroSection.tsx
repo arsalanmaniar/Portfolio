@@ -185,17 +185,14 @@ export function HeroSection() {
                   <ArrowRight className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="group rounded-lg border border-white/10 bg-white/5 px-6 py-3 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:bg-white/10 hover:text-foreground"
+              <a
+                href="/resume.pdf"
+                download
+                className="group flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:bg-white/10"
               >
-                <a href="/resume.pdf" download>
-                  <Download className="transition-transform group-hover:translate-y-0.5" />
-                  Download Resume
-                </a>
-              </Button>
+                <Download className="size-4 transition-transform group-hover:translate-y-0.5" />
+                Download Resume
+              </a>
             </motion.div>
           </motion.div>
           </div>

@@ -158,97 +158,6 @@
   }
 
   /*
-   * Robot mascot — layered humanoid idle. Each utility drives one nested div.
-   * All keyframes animate transform/filter only (GPU-composited); none touch
-   * width/height/top/left, so there is no layout thrash.
-   */
-  .animate-robot-float {
-    animation: robotFloat 4s ease-in-out infinite;
-  }
-  .animate-robot-sway {
-    animation: robotSway 5s ease-in-out infinite;
-  }
-  .animate-robot-breathe {
-    animation: robotBreathe 3.5s ease-in-out infinite;
-  }
-  .animate-robot-micro {
-    animation: robotMicro 7s ease-in-out infinite;
-  }
-  .animate-robot-glow {
-    animation: robotGlow 2.5s ease-in-out infinite;
-  }
-
-  /* Float — subtle up/down drift */
-  @keyframes robotFloat {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-8px);
-    }
-  }
-
-  /* Weight shift — body sways left/right like a standing human */
-  @keyframes robotSway {
-    0%,
-    100% {
-      transform: translateX(0px) rotate(0deg);
-    }
-    25% {
-      transform: translateX(-4px) rotate(-0.8deg);
-    }
-    75% {
-      transform: translateX(4px) rotate(0.8deg);
-    }
-  }
-
-  /* Breathing — subtle scale + lift on the chest */
-  @keyframes robotBreathe {
-    0%,
-    100% {
-      transform: scaleY(1) translateY(0px);
-    }
-    50% {
-      transform: scaleY(1.015) translateY(-3px);
-    }
-  }
-
-  /* Micro — tiny random-feel wiggle for a living, non-static look */
-  @keyframes robotMicro {
-    0%,
-    100% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-    20% {
-      transform: translate(1px, -1px) rotate(0.3deg);
-    }
-    40% {
-      transform: translate(-1px, 1px) rotate(-0.3deg);
-    }
-    60% {
-      transform: translate(1px, 1px) rotate(0.2deg);
-    }
-    80% {
-      transform: translate(-1px, -1px) rotate(-0.2deg);
-    }
-  }
-
-  /* Glow pulse — cyan energy */
-  @keyframes robotGlow {
-    0%,
-    100% {
-      filter: drop-shadow(0 0 8px #06b6d4)
-        drop-shadow(0 0 20px rgba(6, 182, 212, 0.3));
-    }
-    50% {
-      filter: drop-shadow(0 0 25px #06b6d4)
-        drop-shadow(0 0 50px rgba(6, 182, 212, 0.5))
-        drop-shadow(0 0 80px rgba(6, 182, 212, 0.2));
-    }
-  }
-
-  /*
    * Hero background blobs — large blurred circles that slowly drift.
    * Transform-only so they stay GPU-composited.
    */
@@ -290,17 +199,93 @@
     }
   }
 
-  /* Accessibility: stop decorative motion when the user prefers reduced motion */
+  /* Accessibility: stop the drifting blobs when the user prefers reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .animate-robot-float,
-    .animate-robot-sway,
-    .animate-robot-breathe,
-    .animate-robot-micro,
-    .animate-robot-glow,
     .animate-drift-a,
     .animate-drift-b,
     .animate-drift-c {
       animation: none !important;
     }
+  }
+}
+
+/*
+ * Robot mascot keyframes — referenced via inline styles in robot-mascot.tsx.
+ * Defined at the top level (outside @layer) so they are always emitted
+ * regardless of Tailwind's utility tree-shaking. Transform/filter only, so
+ * every layer stays GPU-composited.
+ */
+@keyframes robotFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes robotSway {
+  0%,
+  100% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(5px) rotate(1deg);
+  }
+}
+
+@keyframes robotBreathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.02) translateY(-4px);
+  }
+}
+
+@keyframes robotMicro {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  20% {
+    transform: translate(1px, -2px) rotate(0.4deg);
+  }
+  40% {
+    transform: translate(-2px, 1px) rotate(-0.4deg);
+  }
+  60% {
+    transform: translate(2px, 2px) rotate(0.3deg);
+  }
+  80% {
+    transform: translate(-1px, -2px) rotate(-0.3deg);
+  }
+}
+
+@keyframes robotGlowPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px #06b6d4)
+      drop-shadow(0 0 30px rgba(6, 182, 212, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px #06b6d4)
+      drop-shadow(0 0 60px rgba(6, 182, 212, 0.6))
+      drop-shadow(0 0 100px rgba(6, 182, 212, 0.3));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="robotFloat"],
+  [style*="robotSway"],
+  [style*="robotBreathe"],
+  [style*="robotMicro"],
+  [style*="robotGlowPulse"] {
+    animation: none !important;
   }
 }
