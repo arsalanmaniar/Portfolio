@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { navItems } from "@/lib/nav";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export const Navbar = memo(function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,9 +41,8 @@ export const Navbar = memo(function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop right cluster: theme toggle before nav links */}
+        {/* Desktop nav links */}
         <div className="hidden items-center gap-8 md:flex">
-          <ThemeToggle />
           <ul className="flex items-center gap-8">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -60,19 +58,16 @@ export const Navbar = memo(function Navbar() {
           </ul>
         </div>
 
-        {/* Mobile controls: theme toggle + hamburger */}
-        <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-          >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </div>
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-accent md:hidden"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
       </nav>
 
       {/* Mobile menu */}
