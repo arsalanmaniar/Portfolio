@@ -51,13 +51,24 @@ export function HeroSection() {
       id="home"
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
-      {/* Background grid + dot patterns with a radial fade toward the edges */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-grid mask-fade" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-dots mask-fade opacity-60" />
+      {/* Center radial gradient wash (cyan → transparent) */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_40%,rgba(22,78,99,0.25),transparent_70%)]" />
 
-      {/* 3D particle field + wireframe head (client-only, non-interactive) */}
+      {/* Background grid + dot patterns with a radial fade toward the edges */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-grid mask-fade opacity-40" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-dots mask-fade opacity-50" />
+
+      {/* 3D particle field + wireframe head (client-only, non-interactive).
+          Kept BELOW the drifting blobs below. */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <ParticleBackground />
+      </div>
+
+      {/* Large blurred circles slowly drifting (cyan + blue) */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="animate-drift-a absolute -left-10 top-1/4 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl" />
+        <div className="animate-drift-b absolute right-0 top-1/3 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl" />
+        <div className="animate-drift-c absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-cyan-400/5 blur-3xl" />
       </div>
 
       {/* Cyan glow bloom behind the content */}
@@ -128,23 +139,24 @@ export function HeroSection() {
 
           {/* Main hero content */}
           <motion.div variants={container} initial="hidden" animate="show">
-            <motion.p
-              variants={fadeUp}
-              className="mb-4 font-mono text-sm text-secondary"
-            >
-              {"// Hi, my name is"}
-            </motion.p>
+            {/* Eyebrow: thin cyan line + amber tagline */}
+            <motion.div variants={fadeUp} className="mb-5">
+              <span className="mb-3 block h-px w-16 bg-cyan-500" aria-hidden />
+              <p className="font-mono text-sm uppercase tracking-widest text-secondary">
+                {"// Hi, my name is"}
+              </p>
+            </motion.div>
 
             <motion.h1
               variants={fadeUp}
-              className="bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-clip-text pb-2 font-sans text-5xl font-black tracking-tight text-transparent drop-shadow-[0_0_25px_rgba(6,182,212,0.5)] md:text-7xl lg:text-8xl"
+              className="bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text pb-2 font-sans text-5xl font-black tracking-tight text-transparent drop-shadow-[0_0_25px_rgba(6,182,212,0.45)] md:text-7xl lg:text-8xl"
             >
               Arsalan Maniar
             </motion.h1>
 
             <motion.h2
               variants={fadeUp}
-              className="mt-4 font-mono text-xl font-medium text-foreground sm:text-2xl lg:text-3xl"
+              className="mt-5 font-mono text-2xl font-medium text-foreground sm:text-3xl lg:text-4xl"
             >
               AI Engineer <span className="text-secondary">&amp;</span> Full
               Stack Developer
@@ -152,7 +164,7 @@ export function HeroSection() {
 
             <motion.p
               variants={fadeUp}
-              className="mt-6 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
+              className="mt-7 max-w-xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
             >
               I build modern web apps and AI-powered systems — reverse-engineering
               new technologies and shipping projects that solve real problems.
@@ -160,9 +172,13 @@ export function HeroSection() {
 
             <motion.div
               variants={fadeUp}
-              className="mt-10 flex flex-col gap-4 sm:flex-row"
+              className="mt-11 flex flex-col gap-4 sm:flex-row"
             >
-              <Button asChild size="lg" className="group font-mono">
+              <Button
+                asChild
+                size="lg"
+                className="group rounded-lg bg-primary px-6 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:bg-primary hover:brightness-110 hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]"
+              >
                 <Link href="/#projects">
                   View Projects
                   <ArrowRight className="transition-transform group-hover:translate-x-1" />
@@ -172,7 +188,7 @@ export function HeroSection() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="group border-secondary/50 font-mono text-secondary hover:bg-secondary/10 hover:text-secondary"
+                className="group rounded-lg border border-white/10 bg-white/5 px-6 py-3 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:bg-white/10 hover:text-foreground"
               >
                 <a href="/resume.pdf" download>
                   <Download className="transition-transform group-hover:translate-y-0.5" />

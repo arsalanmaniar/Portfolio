@@ -168,23 +168,34 @@
 
   /*
    * Robot mascot — layered humanoid idle. Each utility drives one nested div.
-   * All keyframes animate transform/filter/opacity only (GPU-composited);
-   * none touch width/height/top/left, so there is no layout thrash.
+   * All keyframes animate transform/filter only (GPU-composited); none touch
+   * width/height/top/left, so there is no layout thrash.
    */
-  .animate-robot-ready {
-    animation: robotReady 8s ease-in-out infinite;
+  .animate-robot-float {
+    animation: robotFloat 4s ease-in-out infinite;
   }
   .animate-robot-sway {
-    animation: robotSway 4s ease-in-out infinite;
+    animation: robotSway 5s ease-in-out infinite;
   }
   .animate-robot-breathe {
-    animation: robotBreathe 3s ease-in-out infinite;
+    animation: robotBreathe 3.5s ease-in-out infinite;
   }
-  .animate-robot-head {
-    animation: robotHeadTurn 6s ease-in-out infinite;
+  .animate-robot-micro {
+    animation: robotMicro 7s ease-in-out infinite;
   }
   .animate-robot-glow {
     animation: robotGlow 2.5s ease-in-out infinite;
+  }
+
+  /* Float — subtle up/down drift */
+  @keyframes robotFloat {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
   }
 
   /* Weight shift — body sways left/right like a standing human */
@@ -212,21 +223,23 @@
     }
   }
 
-  /* Head look-around — very subtle */
-  @keyframes robotHeadTurn {
+  /* Micro — tiny random-feel wiggle for a living, non-static look */
+  @keyframes robotMicro {
     0%,
-    40%,
     100% {
-      transform: translateY(0px);
+      transform: translate(0, 0) rotate(0deg);
     }
     20% {
-      transform: translateY(-2px) translateX(2px);
+      transform: translate(1px, -1px) rotate(0.3deg);
+    }
+    40% {
+      transform: translate(-1px, 1px) rotate(-0.3deg);
     }
     60% {
-      transform: translateY(-1px) translateX(-2px);
+      transform: translate(1px, 1px) rotate(0.2deg);
     }
     80% {
-      transform: translateY(-3px);
+      transform: translate(-1px, -1px) rotate(-0.2deg);
     }
   }
 
@@ -244,27 +257,58 @@
     }
   }
 
-  /* Ready stance — slight forward lean like an action pose */
-  @keyframes robotReady {
+  /*
+   * Hero background blobs — large blurred circles that slowly drift.
+   * Transform-only so they stay GPU-composited.
+   */
+  .animate-drift-a {
+    animation: driftA 26s ease-in-out infinite;
+  }
+  .animate-drift-b {
+    animation: driftB 30s ease-in-out infinite;
+  }
+  .animate-drift-c {
+    animation: driftC 22s ease-in-out infinite;
+  }
+
+  @keyframes driftA {
     0%,
     100% {
-      transform: perspective(800px) rotateY(0deg) translateY(0px);
+      transform: translate(0px, 0px) scale(1);
     }
-    30% {
-      transform: perspective(800px) rotateY(3deg) translateY(-5px);
+    50% {
+      transform: translate(40px, -30px) scale(1.1);
     }
-    70% {
-      transform: perspective(800px) rotateY(-2deg) translateY(-3px);
+  }
+  @keyframes driftB {
+    0%,
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    50% {
+      transform: translate(-50px, 20px) scale(1.05);
+    }
+  }
+  @keyframes driftC {
+    0%,
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    50% {
+      transform: translate(30px, 40px) scale(0.95);
     }
   }
 
-  /* Accessibility: stop all robot motion when the user prefers reduced motion */
+  /* Accessibility: stop decorative motion when the user prefers reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .animate-robot-ready,
+    .animate-robot-float,
     .animate-robot-sway,
     .animate-robot-breathe,
-    .animate-robot-head,
-    .animate-robot-glow {
+    .animate-robot-micro,
+    .animate-robot-glow,
+    .animate-drift-a,
+    .animate-drift-b,
+    .animate-drift-c {
       animation: none !important;
     }
   }
