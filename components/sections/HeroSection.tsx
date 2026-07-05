@@ -188,9 +188,9 @@ export function HeroSection() {
               <a
                 href="/resume.pdf"
                 download
-                className="group flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:bg-white/10"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm text-white border border-cyan-500/40 bg-cyan-950/30 backdrop-blur-sm hover:bg-cyan-900/40 hover:border-cyan-400/70 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
               >
-                <Download className="size-4 transition-transform group-hover:translate-y-0.5" />
+                <Download className="size-4" />
                 Download Resume
               </a>
             </motion.div>
