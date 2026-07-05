@@ -165,4 +165,34 @@
       opacity: 0;
     }
   }
+
+  /* Robot mascot: gentle up/down float */
+  .animate-robot-float {
+    animation: robotFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes robotFloat {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  /* Robot mascot: pulsing cyan drop-shadow glow */
+  .animate-robot-glow {
+    animation: robotGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes robotGlow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 8px #06b6d4) drop-shadow(0 0 20px #06b6d440);
+    }
+    50% {
+      filter: drop-shadow(0 0 20px #06b6d4) drop-shadow(0 0 40px #06b6d480);
+    }
+  }
 }
