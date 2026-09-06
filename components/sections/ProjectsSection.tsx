@@ -21,7 +21,7 @@ type Project = {
   tech: string[];
   image?: string;
   demo?: string;
-  source: string;
+  source?: string;
   featured?: boolean;
 };
 
@@ -35,6 +35,38 @@ const projects: Project[] = [
     demo: "https://arsalanmaniar-ai-chatbot.hf.space/demo",
     source: "https://github.com/arsalanmaniar/ai-chatbot-project",
     featured: true,
+  },
+  {
+    name: "AbhiAya",
+    description:
+      "A production-grade multi-restaurant ordering platform where customers order via WhatsApp using an AI agent. Includes a full restaurant dashboard for managing menus and live orders, plus an admin panel for platform-wide oversight, commissions, and analytics.",
+    tech: [
+      "Next.js",
+      "FastAPI",
+      "Groq API",
+      "WasenderAPI",
+      "PostgreSQL (Neon)",
+      "Upstash Redis",
+    ],
+    image: "/projects/Abhiaya.png",
+    demo: "https://restaurants-7rnczxjjn-arsalan-maniars-projects.vercel.app/login",
+  },
+  {
+    name: "Levenon",
+    description:
+      "A full-stack e-commerce storefront for an unstitched fabric brand — product catalogue with fabric/category filters, wishlist, cart, and an \"Atelier\" story section, built with a distinct brand identity and smooth scroll interactions.",
+    tech: ["Next.js", "React", "Framer Motion", "Lenis"],
+    image: "/projects/Levenon.png",
+    demo: "https://levenon.vercel.app/",
+    source: "https://github.com/arsalanmaniar/Levenon",
+  },
+  {
+    name: "Lumina",
+    description:
+      "An AI-native e-commerce storefront featuring \"Lumi,\" a conversational shopping assistant that reads plain-language intent and resolves it into a curated shortlist across fashion, electronics, and home goods — instead of endless search results.",
+    tech: ["Next.js", "FastAPI", "Groq API"],
+    image: "/projects/Lumina.png",
+    demo: "https://e-commerce-delta-woad.vercel.app/",
   },
   {
     name: "AI Resume Optimizer",
@@ -194,16 +226,18 @@ function ProjectCard({ project }: { project: Project }) {
               Live Demo
             </Link>
           ) : null}
-          <Link
-            href={project.source}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${project.name} — source on GitHub (opens in a new tab)`}
-            className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-foreground transition duration-200 hover:border-white/30 hover:bg-white/10"
-          >
-            <GithubIcon className="size-4" aria-hidden />
-            GitHub
-          </Link>
+          {project.source ? (
+            <Link
+              href={project.source}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${project.name} — source on GitHub (opens in a new tab)`}
+              className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-foreground transition duration-200 hover:border-white/30 hover:bg-white/10"
+            >
+              <GithubIcon className="size-4" aria-hidden />
+              GitHub
+            </Link>
+          ) : null}
         </div>
       </div>
     </motion.article>
